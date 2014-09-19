@@ -13,8 +13,13 @@ def rollDie():
    return rolls
 
 
-def roll(dieType, num_of_die):
+def roll(num_of_die, dieType):
    rolls = []
-   for i in range(1,num_of_die):
-      rolls.append(randint(1,dieType)
-   return [rolls, sum(rolls)]
+   for i in range(0,num_of_die):
+      rolls.append(randint(1,dieType))
+   return rolls
+
+def bestThreeOfFourSum():
+   toss = roll(4,6)
+   toss.remove(min(toss))
+   return [toss,sum(toss)]
