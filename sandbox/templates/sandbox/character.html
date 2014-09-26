@@ -3,7 +3,8 @@
 		  <meta charset="utf-8">
 		  <meta http-equiv="X-UA-Compatible" content="IE=edge">
 		  <meta name="viewport" content="width=device-width, initial-scale=1">
-		  <link rel="stylesheet" href="{{ STATIC_URL}}css/bootstrap.min.css">
+		  <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.min.css">
+		  <script src="{{ STATIC_URL }}js/jquery-2.1.1.min.js"></script>
 		  <!--<link rel="stylesheet" href="{{ STATIC_URL}}css/flatly_bootstrap.css">-->
 		  <script>
 				function rollDie(dieType)
@@ -39,7 +40,7 @@
 	 <body>
 		  <div class="container">
 				<div class="row">
-					 <div class="col-md-3">
+					 <div class="col-sm-2">
 						  <div class="input-group">
 								<span class="input-group-addon">Str:</span>
 								<input type="text" class="form-control" id="strBox" placeholder="NA" />
@@ -65,9 +66,9 @@
 								<input type="text" class="form-control" id="chrBox" placeholder="NA" />
 						  </div>
 
-						  <button onclick="updateTextField()">roll</button>
+						  <button class="btn btn-default" onclick="updateTextField()">roll</button>
 					 </div>
-					 <div class="col-md-1">&nbsp;</div>
+					 <div class="col-sm-1">&nbsp;</div>
 				</div>
 		  </div>
 	 </body>
