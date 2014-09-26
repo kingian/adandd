@@ -1,73 +1,74 @@
 <html>
-   <head>
-      <meta charset="utf-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link rel="stylesheet" href="static/css/flatly_bootstrap.css">
-      <script>
-         function rollDie(dieType)
-         {
-            return Math.floor(Math.random() * dieType) + 1;
-         }
-         
-         function bestThreeofFour()
-         {
-            var rolls = new Array();
-            for (i = 0; i<4;i++)
-            {
-               rolls[i] = rollDie(6);
-            }
-            var a = Math.min.apply(Math,rolls);
-            rolls[rolls.indexOf(a)] = 0;
-            return rolls.reduce(function(a,b){return a+b});
-         }
-         
-         
-         function updateTextField()
-         { 
-            document.getElementById("strBox").value = bestThreeofFour();
-            document.getElementById("dexBox").value = bestThreeofFour();
-            document.getElementById("conBox").value = bestThreeofFour();
-            document.getElementById("intBox").value = bestThreeofFour();
-            document.getElementById("wisBox").value = bestThreeofFour();            
-            document.getElementById("chrBox").value = bestThreeofFour();
-         }
-      </script>
-   </head>
-   
-   <body>
-      <div class="container">
-         <div class="row">
-            <div class="col-md-1">
-               <div class="input-group">
-               <span class="input-group-addon">Str:</span>
-               <input type="text" class="form-control" id="strBox" placeholder="NA" />
-               </div>
-               <div class="input-group">
-               <span class="input-group-addon">Dex:</span>
-               <input type="text" class="form-control" id="dexBox" placeholder="NA" />
-               </div>
-               <div class="input-group">
-               <span class="input-group-addon">Con:</span>
-               <input type="text" class="form-control" id="conBox" placeholder="NA" />
-               </div>
-               <div class="input-group">
-               <span class="input-group-addon">Int:</span>
-               <input type="text" class="form-control" id="intBox" placeholder="NA" />
-               </div>
-               <div class="input-group">
-               <span class="input-group-addon">Wis:</span>
-               <input type="text" class="form-control" id="wisBox" placeholder="NA" />
-               </div>
-               <div class="input-group">
-               <span class="input-group-addon">Chr:</span>
-               <input type="text" class="form-control" id="chrBox" placeholder="NA" />
-               </div>
+	 <head>
+		  <meta charset="utf-8">
+		  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+		  <meta name="viewport" content="width=device-width, initial-scale=1">
+		  <link rel="stylesheet" href="{{ STATIC_URL}}css/bootstrap.min.css">
+		  <!--<link rel="stylesheet" href="{{ STATIC_URL}}css/flatly_bootstrap.css">-->
+		  <script>
+				function rollDie(dieType)
+				{
+					 return Math.floor(Math.random() * dieType) + 1;
+				}
 
-               <button onclick="updateTextField()">roll</button>
-            </div>
-            <div class="col-md-1">&nbsp;</div>
-         </div>
-      </div>
-   </body>
+				function bestThreeofFour()
+				{
+					 var rolls = new Array();
+					 for (i = 0; i<4;i++)
+					 {
+						  rolls[i] = rollDie(6);
+					 }
+					 var a = Math.min.apply(Math,rolls);
+					 rolls[rolls.indexOf(a)] = 0;
+					 return rolls.reduce(function(a,b){return a+b});
+				}
+
+
+				function updateTextField()
+				{ 
+					 document.getElementById("strBox").value = bestThreeofFour();
+					 document.getElementById("dexBox").value = bestThreeofFour();
+					 document.getElementById("conBox").value = bestThreeofFour();
+					 document.getElementById("intBox").value = bestThreeofFour();
+					 document.getElementById("wisBox").value = bestThreeofFour();            
+					 document.getElementById("chrBox").value = bestThreeofFour();
+				}
+		  </script>
+	 </head>
+
+	 <body>
+		  <div class="container">
+				<div class="row">
+					 <div class="col-md-3">
+						  <div class="input-group">
+								<span class="input-group-addon">Str:</span>
+								<input type="text" class="form-control" id="strBox" placeholder="NA" />
+						  </div>
+						  <div class="input-group">
+								<span class="input-group-addon">Dex:</span>
+								<input type="text" class="form-control" id="dexBox" placeholder="NA" />
+						  </div>
+						  <div class="input-group">
+								<span class="input-group-addon">Con:</span>
+								<input type="text" class="form-control" id="conBox" placeholder="NA" />
+						  </div>
+						  <div class="input-group">
+								<span class="input-group-addon">Int:</span>
+								<input type="text" class="form-control" id="intBox" placeholder="NA" />
+						  </div>
+						  <div class="input-group">
+								<span class="input-group-addon">Wis:</span>
+								<input type="text" class="form-control" id="wisBox" placeholder="NA" />
+						  </div>
+						  <div class="input-group">
+								<span class="input-group-addon">Chr:</span>
+								<input type="text" class="form-control" id="chrBox" placeholder="NA" />
+						  </div>
+
+						  <button onclick="updateTextField()">roll</button>
+					 </div>
+					 <div class="col-md-1">&nbsp;</div>
+				</div>
+		  </div>
+	 </body>
 </html>

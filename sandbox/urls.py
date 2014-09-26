@@ -3,6 +3,7 @@ from sandbox import views
 
 
 urlpatterns = patterns('',
-                       url(r'^$', views.newcharacter),
+                       url(r'^new/character/', views.newcharacter),
+							  url(r'new/initstats/', views.savenewcharacter),
                       )
 
