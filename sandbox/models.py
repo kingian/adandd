@@ -120,31 +120,48 @@ class OsricAttributeTable(models.Model):
         db_table = 'osric_attribute_table'
 
 class OsricRaceMinsMaxs(models.Model):
-   race_id = models.IntegerField(primary_key=True)
-   race = models.CharField(max_length=255, blank=True)
-   str_min = models.IntegerField(blank=True, null=True)
-   dex_min = models.IntegerField(blank=True, null=True)
-   con_min = models.IntegerField(blank=True, null=True)
-   int_min = models.IntegerField(blank=True, null=True)
-   wis_min = models.IntegerField(blank=True, null=True)
-   cha_min = models.IntegerField(blank=True, null=True)
-   assassin = models.IntegerField(blank=True, null=True)
-   cleric = models.IntegerField(blank=True, null=True)
-   druid = models.IntegerField(blank=True, null=True)
-   fighter = models.IntegerField(blank=True, null=True)
-   illusionist = models.IntegerField(blank=True, null=True)
-   magic_user = models.IntegerField(blank=True, null=True)
-   paladin = models.IntegerField(blank=True, null=True)
-   ranger = models.IntegerField(blank=True, null=True)
-   thief = models.IntegerField(blank=True, null=True)
-   def printline(self):
+	race_id = models.IntegerField(primary_key=True)
+	race = models.CharField(max_length=255, blank=True)
+	str_min = models.IntegerField(blank=True, null=True)
+	dex_min = models.IntegerField(blank=True, null=True)
+	con_min = models.IntegerField(blank=True, null=True)
+	int_min = models.IntegerField(blank=True, null=True)
+	wis_min = models.IntegerField(blank=True, null=True)
+	cha_min = models.IntegerField(blank=True, null=True)
+	assassin = models.IntegerField(blank=True, null=True)
+	cleric = models.IntegerField(blank=True, null=True)
+	druid = models.IntegerField(blank=True, null=True)
+	fighter = models.IntegerField(blank=True, null=True)
+	illusionist = models.IntegerField(blank=True, null=True)
+	magic_user = models.IntegerField(blank=True, null=True)
+	paladin = models.IntegerField(blank=True, null=True)
+	ranger = models.IntegerField(blank=True, null=True)
+	thief = models.IntegerField(blank=True, null=True)
+
+	def printline(self):
 	  return self.race
-   def __iter__(self):
-		 for i in self._meta.get_all_field_names():
+	# Builds a dictionary of attribute
+	# minimums.
+	def buildMinDict():
+		return {'str':str_min,'dex':dex_min,'con':con_min,'int':int_min,'wis':wis_min,'cha':cha_min}
+
+	# Takes a dictionary of stats and 
+	# returns a boolean as to whether
+	# the stats qualify.
+	def checkRaceQualification(atts):
+		mins = buildMinDict()
+		for stat in mins.keys():
+			if atts[stat] < mins[stat]:
+				return False
+		return True
+	#def getClassQualifications():
+	def __iter__(self):
+		for i in self._meta.get_all_field_names():
 			yield (i, getattr(self, i))
-   class Meta:
-	  managed = False
-	  db_table = 'osric_race_mins_maxs'
+	
+	class Meta:
+		managed = False
+		db_table = 'osric_race_mins_maxs'
 	
 
 class OsricThac0(models.Model):

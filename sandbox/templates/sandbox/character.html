@@ -1,75 +1,101 @@
 <html>
-	 <head>
-		  <meta charset="utf-8">
-		  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-		  <meta name="viewport" content="width=device-width, initial-scale=1">
-		  <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.min.css">
-		  <script src="{{ STATIC_URL }}js/jquery-2.1.1.min.js"></script>
-		  <!--<link rel="stylesheet" href="{{ STATIC_URL}}css/flatly_bootstrap.css">-->
-		  <script>
-				function rollDie(dieType)
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.min.css">
+		<script src="{{ STATIC_URL }}js/jquery-2.1.1.min.js"></script>
+		<!--<link rel="stylesheet" href="{{ STATIC_URL}}css/flatly_bootstrap.css">-->
+		<script>
+			function rollDie(dieType)
+			{
+				return Math.floor(Math.random() * dieType) + 1;
+			}
+
+			function bestThreeofFour()
+			{
+				var rolls = new Array();
+				for (i = 0; i<4;i++)
 				{
-					 return Math.floor(Math.random() * dieType) + 1;
+					rolls[i] = rollDie(6);
 				}
-
-				function bestThreeofFour()
-				{
-					 var rolls = new Array();
-					 for (i = 0; i<4;i++)
-					 {
-						  rolls[i] = rollDie(6);
-					 }
-					 var a = Math.min.apply(Math,rolls);
-					 rolls[rolls.indexOf(a)] = 0;
-					 return rolls.reduce(function(a,b){return a+b});
-				}
+				var a = Math.min.apply(Math,rolls);
+				rolls[rolls.indexOf(a)] = 0;
+				return rolls.reduce(function(a,b){return a+b});
+			}
 
 
-				function updateTextField()
-				{ 
-					 document.getElementById("strBox").value = bestThreeofFour();
-					 document.getElementById("dexBox").value = bestThreeofFour();
-					 document.getElementById("conBox").value = bestThreeofFour();
-					 document.getElementById("intBox").value = bestThreeofFour();
-					 document.getElementById("wisBox").value = bestThreeofFour();            
-					 document.getElementById("chrBox").value = bestThreeofFour();
-				}
-		  </script>
-	 </head>
+			function updateTextField()
+			{ 
+				document.getElementById("strBox").value = bestThreeofFour();
+				document.getElementById("dexBox").value = bestThreeofFour();
+				document.getElementById("conBox").value = bestThreeofFour();
+				document.getElementById("intBox").value = bestThreeofFour();
+				document.getElementById("wisBox").value = bestThreeofFour();            
+				document.getElementById("chrBox").value = bestThreeofFour();
+			}
+			
+			function sendAttributes()
+			{
+				$.post("{% url 'sandbox:testMethods' %}",
+					   {
+						strength : document.getElementById("strBox").value,
+						dexterity : document.getElementById("dexBox").value,
+						constitution : document.getElementById("conBox").value,
+						intellegence : document.getElementById("intBox").value,
+						wisdom : document.getElementById("wisBox").value,
+						charisma : document.getElementById("chrBox").value
+					   })
+				.done( function( data ) {
+					alert( "Data Recieved: " + data )
+					}
+					)
+			}
+		</script>
+	</head>
 
-	 <body>
-		  <div class="container">
+	<body>
+<!--		<form method="post" action="{% url 'sandbox:testMethods' %}"> -->
+			{% csrf_token %}
+			<div class="container">
 				<div class="row">
-					 <div class="col-sm-2">
-						  <div class="input-group">
-								<span class="input-group-addon">Str:</span>
-								<input type="text" class="form-control" id="strBox" placeholder="NA" />
-						  </div>
-						  <div class="input-group">
-								<span class="input-group-addon">Dex:</span>
-								<input type="text" class="form-control" id="dexBox" placeholder="NA" />
-						  </div>
-						  <div class="input-group">
-								<span class="input-group-addon">Con:</span>
-								<input type="text" class="form-control" id="conBox" placeholder="NA" />
-						  </div>
-						  <div class="input-group">
-								<span class="input-group-addon">Int:</span>
-								<input type="text" class="form-control" id="intBox" placeholder="NA" />
-						  </div>
-						  <div class="input-group">
-								<span class="input-group-addon">Wis:</span>
-								<input type="text" class="form-control" id="wisBox" placeholder="NA" />
-						  </div>
-						  <div class="input-group">
-								<span class="input-group-addon">Chr:</span>
-								<input type="text" class="form-control" id="chrBox" placeholder="NA" />
-						  </div>
-
-						  <button class="btn btn-default" onclick="updateTextField()">roll</button>
-					 </div>
-					 <div class="col-sm-1">&nbsp;</div>
+					&nbsp;
 				</div>
-		  </div>
-	 </body>
+				<div class="row">
+					<div class="col-sm-2">
+						<div class="input-group">
+							<span class="input-group-addon">Str:</span>
+							<input type="text" class="form-control" id="strBox" placeholder="NA" disabled />
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">Dex:</span>
+							<input type="text" class="form-control" id="dexBox" placeholder="NA" disabled/>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">Con:</span>
+							<input type="text" class="form-control" id="conBox" placeholder="NA" disabled/>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">Int:</span>
+							<input type="text" class="form-control" id="intBox" placeholder="NA" disabled/>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">Wis:</span>
+							<input type="text" class="form-control" id="wisBox" placeholder="NA" disabled/>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">Chr:</span>
+							<input type="text" class="form-control" id="chrBox" placeholder="NA" disabled/>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-2">
+						<button class="btn btn-default" onclick="updateTextField()">roll</button>
+						<button class="btn btn-default" onclick="sendAttributes()">accept</button>
+					</div>
+				</div>	
+			</div>
+<!--		</form> -->
+	</body>
 </html>
