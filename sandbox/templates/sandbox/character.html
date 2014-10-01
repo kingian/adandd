@@ -5,6 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.min.css">
 		<script src="{{ STATIC_URL }}js/jquery-2.1.1.min.js"></script>
+		<script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
 		<!--<link rel="stylesheet" href="{{ STATIC_URL}}css/flatly_bootstrap.css">-->
 		<script>
 			function rollDie(dieType)
@@ -34,68 +35,93 @@
 				document.getElementById("wisBox").value = bestThreeofFour();            
 				document.getElementById("chrBox").value = bestThreeofFour();
 			}
-			
+
 			function sendAttributes()
 			{
 				$.post("{% url 'sandbox:testMethods' %}",
 					   {
-						strength : document.getElementById("strBox").value,
-						dexterity : document.getElementById("dexBox").value,
-						constitution : document.getElementById("conBox").value,
-						intellegence : document.getElementById("intBox").value,
-						wisdom : document.getElementById("wisBox").value,
-						charisma : document.getElementById("chrBox").value
-					   })
+						   "str" : document.getElementById("strBox").value,
+						   "dex" : document.getElementById("dexBox").value,
+						   "con" : document.getElementById("conBox").value,
+						   "int" : document.getElementById("intBox").value,
+						   "wis" : document.getElementById("wisBox").value,
+						   "cha" : document.getElementById("chrBox").value
+					   },
+					   "json")
 				.done( function( data ) {
 					alert( "Data Recieved: " + data )
-					}
-					)
+				}
+					 )
+			}
+
+			function setRaceList(list)
+			{
+
 			}
 		</script>
 	</head>
 
 	<body>
-<!--		<form method="post" action="{% url 'sandbox:testMethods' %}"> -->
-			{% csrf_token %}
-			<div class="container">
-				<div class="row">
-					&nbsp;
-				</div>
-				<div class="row">
-					<div class="col-sm-2">
-						<div class="input-group">
-							<span class="input-group-addon">Str:</span>
-							<input type="text" class="form-control" id="strBox" placeholder="NA" disabled />
-						</div>
-						<div class="input-group">
-							<span class="input-group-addon">Dex:</span>
-							<input type="text" class="form-control" id="dexBox" placeholder="NA" disabled/>
-						</div>
-						<div class="input-group">
-							<span class="input-group-addon">Con:</span>
-							<input type="text" class="form-control" id="conBox" placeholder="NA" disabled/>
-						</div>
-						<div class="input-group">
-							<span class="input-group-addon">Int:</span>
-							<input type="text" class="form-control" id="intBox" placeholder="NA" disabled/>
-						</div>
-						<div class="input-group">
-							<span class="input-group-addon">Wis:</span>
-							<input type="text" class="form-control" id="wisBox" placeholder="NA" disabled/>
-						</div>
-						<div class="input-group">
-							<span class="input-group-addon">Chr:</span>
-							<input type="text" class="form-control" id="chrBox" placeholder="NA" disabled/>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-sm-2">
-						<button class="btn btn-default" onclick="updateTextField()">roll</button>
-						<button class="btn btn-default" onclick="sendAttributes()">accept</button>
-					</div>
-				</div>	
+		<!--		<form method="post" action="{% url 'sandbox:testMethods' %}"> -->
+		{% csrf_token %}
+		<div class="container">
+			<div class="row">
+				&nbsp;
 			</div>
-<!--		</form> -->
+			<div class="row">
+				<div class="col-sm-3">
+					<div class="input-group">
+						<span class="input-group-addon">Str:</span>
+						<input type="text" class="form-control" id="strBox" placeholder="NA" disabled />
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">Dex:</span>
+						<input type="text" class="form-control" id="dexBox" placeholder="NA" disabled/>
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">Con:</span>
+						<input type="text" class="form-control" id="conBox" placeholder="NA" disabled/>
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">Int:</span>
+						<input type="text" class="form-control" id="intBox" placeholder="NA" disabled/>
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">Wis:</span>
+						<input type="text" class="form-control" id="wisBox" placeholder="NA" disabled/>
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon">Chr:</span>
+						<input type="text" class="form-control" id="chrBox" placeholder="NA" disabled/>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-3">
+					<button id="rollbutton" class="btn btn-default" onclick="updateTextField()">roll</button>
+					<button id="acceptrollbutton" class="btn btn-default" onclick="sendAttributes()">accept score</button>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-2">
+					<div class="dropdown">
+						<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+							Race
+							<span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+							<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Human</a></li>
+							<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Dwarf</a></li>
+							<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Elf</a></li>
+							<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Gnome</a></li>
+							<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Half-Elf</a></li>
+							<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Halfling</a></li>
+							<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Half-Orc</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>	
+		</div>
+		<!--		</form> -->
 	</body>
 </html>

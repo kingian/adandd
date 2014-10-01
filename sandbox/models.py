@@ -142,17 +142,20 @@ class OsricRaceMinsMaxs(models.Model):
 	  return self.race
 	# Builds a dictionary of attribute
 	# minimums.
-	def buildMinDict():
-		return {'str':str_min,'dex':dex_min,'con':con_min,'int':int_min,'wis':wis_min,'cha':cha_min}
+	def buildMinDict(self):
+		return {'str':self.str_min,'dex':self.dex_min,'con':self.con_min,'int':self.int_min,'wis':self.wis_min,'cha':self.cha_min}
 
 	# Takes a dictionary of stats and 
 	# returns a boolean as to whether
 	# the stats qualify.
-	def checkRaceQualification(atts):
-		mins = buildMinDict()
+	def checkRaceQualification(self,atts):
+		mins = self.buildMinDict()
+		print self.race
 		for stat in mins.keys():
-			if atts[stat] < mins[stat]:
+			print stat + ":" + str(atts[stat]) + "<" + str(mins[stat]) + ":" + str(int(atts[stat])<int(mins[stat])) + "-" 
+			if int(atts[stat]) < int(mins[stat]):
 				return False
+		print "\n"
 		return True
 	#def getClassQualifications():
 	def __iter__(self):
