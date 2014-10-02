@@ -32,7 +32,8 @@ def testMethods(request):
 		minmax = OsricRaceMinsMaxs.objects.all()
 		for obj in minmax:
 			if obj.checkRaceQualification(data):
-				pack += str(obj.race_id) + ":" + obj.race + ","
+				pack += obj.race + ","
+		pack = pack[0:(len(pack)-1)]
 		print pack
 	except Exception as e:
 		#print request

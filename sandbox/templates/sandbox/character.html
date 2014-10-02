@@ -53,16 +53,33 @@
 				}
 					 )
 			}
-
-			function setRaceList(list)
+			
+			function disableAllRaceOptions()
 			{
+				$("#humanOption").attr("class","disabled");
+				$("#dwarfOption").attr("class","disabled");
+				$("#elfOption").attr("class","disabled");
+				$("#gnomeOption").attr("class","disabled");
+				$("#halfElfOption").attr("class","disabled");
+				$("#humanOption").attr("class","disabled");
+				$("#halflingOption").attr("class","disabled");
+				$("#halfOrcOption").attr("class","disabled");		
+			}
+
+			/*function setRaceList(optStr)
+			{
+				var optList = optStr.split(",");
+				for (race of optList)
+				{
+					if (race ==)
+				}*/
+				
 
 			}
 		</script>
 	</head>
 
 	<body>
-		<!--		<form method="post" action="{% url 'sandbox:testMethods' %}"> -->
 		{% csrf_token %}
 		<div class="container">
 			<div class="row">
@@ -100,6 +117,7 @@
 				<div class="col-sm-3">
 					<button id="rollbutton" class="btn btn-default" onclick="updateTextField()">roll</button>
 					<button id="acceptrollbutton" class="btn btn-default" onclick="sendAttributes()">accept score</button>
+					<button  class="btn btn-default" onclick="disableAllRaceOptions()">Go</button>
 				</div>
 			</div>
 			<div class="row">
@@ -110,13 +128,13 @@
 							<span class="caret"></span>
 						</button>
 						<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-							<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Human</a></li>
-							<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Dwarf</a></li>
-							<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Elf</a></li>
-							<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Gnome</a></li>
-							<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Half-Elf</a></li>
-							<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Halfling</a></li>
-							<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Half-Orc</a></li>
+							<li id="humanOption" role="presentation"><a role="menuitem" tabindex="-1" href="#">Human</a></li>
+							<li id="dwarfOption" role="presentation"><a role="menuitem" tabindex="-1" href="#">Dwarf</a></li>
+							<li id="elfOption" role="presentation"><a role="menuitem" tabindex="-1" href="#">Elf</a></li>
+							<li id="gnomeOption" role="presentation"><a role="menuitem" tabindex="-1" href="#">Gnome</a></li>
+							<li id="halfElfOption" role="presentation"><a role="menuitem" tabindex="-1" href="#">Half-Elf</a></li>
+							<li id="halflingOption" role="presentation"><a role="menuitem" tabindex="-1" href="#">Halfling</a></li>
+							<li id="halfOrcOption" role="presentation"><a role="menuitem" tabindex="-1" href="#">Half-Orc</a></li>
 						</ul>
 					</div>
 				</div>
