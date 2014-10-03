@@ -38,6 +38,7 @@
 
 			function sendAttributes()
 			{
+				disableAllRaceOptions();
 				$.post("{% url 'sandbox:testMethods' %}",
 					   {
 						   "str" : document.getElementById("strBox").value,
@@ -48,10 +49,7 @@
 						   "cha" : document.getElementById("chrBox").value
 					   },
 					   "json")
-				.done( function( data ) {
-					alert( "Data Recieved: " + data )
-				}
-					 )
+				.done( setRaceList(data) )
 			}
 			
 			function disableAllRaceOptions()
@@ -61,18 +59,40 @@
 				$("#elfOption").attr("class","disabled");
 				$("#gnomeOption").attr("class","disabled");
 				$("#halfElfOption").attr("class","disabled");
-				$("#humanOption").attr("class","disabled");
 				$("#halflingOption").attr("class","disabled");
 				$("#halfOrcOption").attr("class","disabled");		
 			}
 
-			/*function setRaceList(optStr)
+			function setRaceList(optStr)
 			{
 				var optList = optStr.split(",");
-				for (race of optList)
+				for (let race of optList)
 				{
-					if (race ==)
-				}*/
+					if (race =="human")
+					{
+						$("humanOption").removeAttr("class");
+					}
+					if (race == "elf")
+					{
+						$("elfOption").removeAttr("class");
+					}
+					if (race == "gnome")
+					{
+						$("gnomeOption").removeAttr("class");
+					}
+					if (race == "half-elf")
+					{
+						$("halfElfOption").removeAttr("class");
+					}
+					if (race == "halfling")
+					{
+						$("halflingOption").removeAttr("class");
+					}
+					if (race == "half-orc")
+					{
+						$("halfOrcOption").removeAttr("class");
+					}
+				}
 				
 
 			}
