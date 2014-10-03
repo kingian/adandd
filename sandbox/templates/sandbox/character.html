@@ -6,7 +6,6 @@
 		<link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.min.css">
 		<script src="{{ STATIC_URL }}js/jquery-2.1.1.min.js"></script>
 		<script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
-		<!--<link rel="stylesheet" href="{{ STATIC_URL}}css/flatly_bootstrap.css">-->
 		<script>
 			function rollDie(dieType)
 			{
@@ -49,52 +48,68 @@
 						   "cha" : document.getElementById("chrBox").value
 					   },
 					   "json")
-				.done( setRaceList(data) )
+				.done( function(data) { setRaceList(data) })
 			}
 			
 			function disableAllRaceOptions()
 			{
-				$("#humanOption").attr("class","disabled");
-				$("#dwarfOption").attr("class","disabled");
-				$("#elfOption").attr("class","disabled");
-				$("#gnomeOption").attr("class","disabled");
-				$("#halfElfOption").attr("class","disabled");
-				$("#halflingOption").attr("class","disabled");
-				$("#halfOrcOption").attr("class","disabled");		
+				$("#humanOption").hide();
+				$("#dwarfOption").hide();
+				$("#elfOption").hide();
+				$("#gnomeOption").hide();
+				$("#halfElfOption").hide();
+				$("#halflingOption").hide();
+				$("#halfOrcOption").hide();
+				
+//				$("#humanOption").attr("class","disabled");
+//				$("#dwarfOption").attr("class","disabled");
+//				$("#elfOption").attr("class","disabled");
+//				$("#gnomeOption").attr("class","disabled");
+//				$("#halfElfOption").attr("class","disabled");
+//				$("#halflingOption").attr("class","disabled");
+//				$("#halfOrcOption").attr("class","disabled");	
 			}
 
 			function setRaceList(optStr)
 			{
+				console.log(optStr);
+//				$("#humanOption").removeAttr("class");
+				$("#humanOption").show();
 				var optList = optStr.split(",");
-				for (let race of optList)
+				for (var i in optList)
 				{
-					if (race =="human")
+					var raceStr = optList[parseInt(i)];
+					console.log("Token:", raceStr);
+					if (raceStr =="dwarf")
 					{
-						$("humanOption").removeAttr("class");
+//						$("#dwarfOption").removeAttr("class");
+						$("#dwarfOption").show();
 					}
-					if (race == "elf")
+					if (raceStr == "elf")
 					{
-						$("elfOption").removeAttr("class");
+//						$("#elfOption").removeAttr("class");
 					}
-					if (race == "gnome")
+					if (raceStr == "gnome")
 					{
-						$("gnomeOption").removeAttr("class");
+//						$("#gnomeOption").removeAttr("class");
+						$("#gnomeOption").show();						
 					}
-					if (race == "half-elf")
+					if (raceStr == "half-elf")
 					{
-						$("halfElfOption").removeAttr("class");
+//						$("#halfElfOption").removeAttr("class");
+						$("#halfElfOption").show();
 					}
-					if (race == "halfling")
+					if (raceStr == "halfling")
 					{
-						$("halflingOption").removeAttr("class");
+//						$("#halflingOption").removeAttr("class");
+						$("#halflingOption").show();
 					}
-					if (race == "half-orc")
+					if (raceStr == "half-orc")
 					{
-						$("halfOrcOption").removeAttr("class");
+//						$("#halfOrcOption").removeAttr("class");
+						$("#halfOrcOption").show();
 					}
 				}
-				
-
 			}
 		</script>
 	</head>
@@ -137,7 +152,6 @@
 				<div class="col-sm-3">
 					<button id="rollbutton" class="btn btn-default" onclick="updateTextField()">roll</button>
 					<button id="acceptrollbutton" class="btn btn-default" onclick="sendAttributes()">accept score</button>
-					<button  class="btn btn-default" onclick="disableAllRaceOptions()">Go</button>
 				</div>
 			</div>
 			<div class="row">
@@ -160,6 +174,5 @@
 				</div>
 			</div>	
 		</div>
-		<!--		</form> -->
 	</body>
 </html>
