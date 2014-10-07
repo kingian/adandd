@@ -1,0 +1,268 @@
+<html>
+<head>
+	<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro|Droid+Sans|Lato|Arvo|PT+Sans|PT+Sans+Narrow|Arimo|Ubuntu|Lobster|Shadows+Into+Light|Droid+Serif|Open+Sans|Roboto|Oswald|Open+Sans+Condensed:300|Roboto+Condensed|Raleway|Montserrat|Roboto+Slab|Yanone+Kaffeesatz|Oxygen' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="styles.css" media="screen" />
+
+</head>
+<body>
+
+<div id="widget_container" style='max-width:480px;background-color:#dfdfdf;height:640px;'>
+	<div class="char_stat small" >
+		<div class="display_layer">
+			<h6 class="bonus">+1</h6>
+			<h2 class="value">16</h2>
+			<h4 class="abbreviation">str</h4>
+		</div>
+		<div class="edit_layer">
+			<input type="text" class="input_field" value=''>
+		</div>
+	</div>
+	<div class="char_stat small" >
+		<div class="display_layer">
+			<h6 class="bonus">+1</h6>
+			<h2 class="value">16</h2>
+			<h4 class="abbreviation">str</h4>
+		</div>
+		<div class="edit_layer">
+			<input type="text" class="input_field" value=''>
+		</div>
+	</div>
+	<div class="char_stat small" >
+		<div class="display_layer">
+			<h6 class="bonus">+1</h6>
+			<h2 class="value">16</h2>
+			<h4 class="abbreviation">str</h4>
+		</div>
+		<div class="edit_layer">
+			<input type="text" class="input_field" value=''>
+		</div>
+	</div>
+	<div class="char_stat small" >
+		<div class="display_layer">
+			<h6 class="bonus">+1</h6>
+			<h2 class="value">16</h2>
+			<h4 class="abbreviation">str</h4>
+		</div>
+		<div class="edit_layer">
+			<input type="text" class="input_field" value=''>
+		</div>
+	</div>
+	<div class="char_stat small" >
+		<div class="display_layer">
+			<h6 class="bonus">+1</h6>
+			<h2 class="value">16</h2>
+			<h4 class="abbreviation">str</h4>
+		</div>
+		<div class="edit_layer">
+			<input type="text" class="input_field" value=''>
+		</div>
+	</div>
+</div>
+
+
+</body>
+
+<script type="text/javascript">
+	
+	var activity = false;
+	var timeout = null;
+
+	function stat_was_tapped(element){
+
+		display_layer = element.querySelector('.display_layer')
+		edit_layer = element.querySelector('.edit_layer')
+		input_field = element.querySelector('.input_field')
+		
+		if (element.dataset.mode == 'display') {
+			element.dataset.mode = 'edit';
+			edit_stat(display_layer)
+			input_field.focus();
+			input_field.value = 20;
+			input_field.onkeyup = function(evt){
+				console.log(input_field.value)
+				if(timeout) clearTimeout(timeout);
+				timeout = setTimeout(function(){
+					input_field.blur()
+					element.dataset.mode = 'display';
+					display_stat(display_layer)
+				}, 3000)
+			}
+
+			
+
+		}else{
+			//element.dataset.mode = 'display';
+			//display_stat(display_layer)
+		}
+	}
+
+	function save_data(){
+
+	}
+
+function randomInt(min, max) {
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+
+
+
+
+	var stats = [
+		{
+			title:"Strength",
+			abbreviation:"str",
+			value:randomInt(8,20),
+			display_type:"default",
+			edit_type:'range',
+			meta:{
+				max:22,
+				min:0,
+				bonuses:function(input){
+					//put any formula in here needed
+					return Math.round((Number(input)-14 ) /2);
+				},
+				modifiers:function(input, character_data){
+					//we could put ajax call in here to get this chart
+					racial_mod = {
+						'human':0,
+						'elf':1,
+						'dwarf':1,
+						'halfling':-1
+					}
+					return Number(input) + racial_mod[character_data.race];
+				}
+			}
+		},
+		{
+			title:"Intelligence",
+			abbreviation:"int",
+			value:randomInt(8,20),
+			display_type:"default",
+			edit_type:'range',
+			meta:{
+				max:22,
+				min:0,
+				bonuses:function(input){
+					//put any formula in here needed
+					return Math.round((Number(input)-14 ) /2);
+				},
+				modifiers:function(input, character_data){
+					//we could put ajax call in here to get this chart
+					racial_mod = {
+						'human':0,
+						'elf':1,
+						'dwarf':0,
+						'halfling':1
+					}
+					return Number(input) + racial_mod[character_data.race];
+				}
+			}
+		},
+		{
+			title:"Constitution",
+			abbreviation:"con",
+			value:randomInt(8,20),
+			display_type:"default",
+			edit_type:'range',
+			meta:{
+				max:22,
+				min:0,
+				bonuses:function(input){
+					//put any formula in here needed
+					return Math.round((Number(input)-14 ) /2);
+				},
+				modifiers:function(input, character_data){
+					//we could put ajax call in here to get this chart
+					racial_mod = {
+						'human':0,
+						'elf':1,
+						'dwarf':2,
+						'halfling':1
+					}
+					return Number(input) + racial_mod[character_data.race];
+				}
+			}
+		},
+		{
+			title:"Wisdom",
+			abbreviation:"wis",
+			value:randomInt(8,20),
+			display_type:"default",
+			edit_type:'range',
+			meta:{
+				max:22,
+				min:0,
+				bonuses:function(input){
+					//put any formula in here needed
+					return Math.round((Number(input)-14 ) /2);
+				},
+				modifiers:function(input, character_data){
+					//we could put ajax call in here to get this chart
+					racial_mod = {
+						'human':0,
+						'elf':1,
+						'dwarf':2,
+						'halfling':1
+					}
+					return Number(input) + racial_mod[character_data.race];
+				}
+			}
+		},
+		{
+			title:"Charisma",
+			abbreviation:"char",
+			value:randomInt(8,20),
+			display_type:"default",
+			edit_type:'range',
+			meta:{
+				max:22,
+				min:0,
+				bonuses:function(input){
+					//put any formula in here needed
+					return Math.round((Number(input)-14 ) /2);
+				},
+				modifiers:function(input, character_data){
+					//we could put ajax call in here to get this chart
+					racial_mod = {
+						'human':0,
+						'elf':1,
+						'dwarf':2,
+						'halfling':1
+					}
+					return Number(input) + racial_mod[character_data.race];
+				}
+			}
+		}
+	]
+
+	var character_data = {
+		race:'dwarf',
+		age:30
+	}
+
+
+</script>
+<script type="text/javascript" src="UIBuilder.js"></script>
+<script type="text/javascript">
+	window.onload = function(){
+		console.log('hello there');
+
+		var stat_containers = document.querySelectorAll('.char_stat');
+		console.log(stat_containers)
+		for (var i = 0; i < stats.length; i++) {
+			console.log(stat_containers[i])
+			var stat_widget = new UIWidget(stat_containers[i], stats[i], character_data)
+		};
+
+		// strength_stat = new UIWidget(document.querySelector('.char_stat'), stats[0], character_data)
+
+
+
+	}
+</script>
+<!--VENDOR-->
+<script src="TweenMax.min.js"></script>
+
+
+
+</html>
